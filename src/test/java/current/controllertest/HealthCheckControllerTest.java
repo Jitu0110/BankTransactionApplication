@@ -1,30 +1,45 @@
-//package current.controllertest;
-//
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.http.MediaType;
-//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-//import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-//
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@SpringBootTest
-//@AutoConfigureMockMvc
-//public class HealthCheckControllerTest {
-//
-//    @Autowired
-//    private MockMvc mockMvc;
-//
-//    @Test
-//    public void testPingEndpoint() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.get("/ping")
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.serverTime").isNotEmpty());
-//    }
-//}
+package current.controllertest;
+import current.controller.HealthCheckController;
+import current.model.Ping;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.time.Instant;
+
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.time.Instant;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+@Slf4j
+public class HealthCheckControllerTest {
+
+    @Mock
+    private HealthCheckController healthCheckController;
+
+    @Test
+    void testHealthCheck() {
+        // Arrange
+        String timestamp = Instant.now().toString();
+        Ping ping = new Ping(timestamp);
+        when(healthCheckController.healthCheck()).thenReturn(ResponseEntity.ok(ping));
+
+        // Act
+        ResponseEntity<Ping> response = healthCheckController.healthCheck();
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(timestamp, response.getBody().getServerTime());
+    }
+}

@@ -1,7 +1,7 @@
 package current.controller;
 
 import current.exception.DuplicateMessageIdException;
-import current.exception.NotMatchingMessagedIdException;
+import current.exception.NotMatchingMessageIdException;
 import current.exception.UserNotFoundException;
 import current.model.*;
 import current.model.Error;
@@ -35,13 +35,13 @@ public class ApplicationController {
 
         try {
             if(!messageId.equals(authorizationRequest.getMessageId())){
-                throw new NotMatchingMessagedIdException(messageId,authorizationRequest.getMessageId());
+                throw new NotMatchingMessageIdException(messageId,authorizationRequest.getMessageId());
             }
             // Process authorization request and calculate updated balance
             AuthorizationResponse authorizationResponse = service.processAuthorization(authorizationRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(authorizationResponse);
         }
-        catch (NotMatchingMessagedIdException | DuplicateMessageIdException | UserNotFoundException e){
+        catch (NotMatchingMessageIdException | DuplicateMessageIdException | UserNotFoundException e){
             Error error = new Error();
             error.setMessage(e.getMessage());
             error.setCode("400");
@@ -66,7 +66,7 @@ public class ApplicationController {
         try {
 
             if(!messageId.equals(loadRequest.getMessageId())){
-                throw new NotMatchingMessagedIdException(messageId,loadRequest.getMessageId());
+                throw new NotMatchingMessageIdException(messageId,loadRequest.getMessageId());
             }
 
             // Process load request and calculate updated balance
@@ -74,7 +74,7 @@ public class ApplicationController {
 
             return ResponseEntity.status(HttpStatus.CREATED).body(loadResponse);
         }
-        catch (NotMatchingMessagedIdException | DuplicateMessageIdException e){
+        catch (NotMatchingMessageIdException | DuplicateMessageIdException e){
             Error error = new Error();
             error.setMessage(e.getMessage());
             error.setCode("400");

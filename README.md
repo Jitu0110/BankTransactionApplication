@@ -32,13 +32,42 @@ We are looking for attention in the following areas:
 
 # Candidate README
 ## Bootstrap instructions
-*Replace this: To run this server locally, do the following:*
+*To run this server locally, do the following:*
+1) Clone the repository.
+2) Open your preferred IDE (e.g., IntelliJ IDEA, Eclipse, or Visual Studio Code).
+3) Ensure that your IDE has the necessary Java and Spring Boot plugins installed and configured.
+4) In your IDE, locate the main application class (named TransactionServiceApplication.java).
+   Right-click on the class and select Run to start the Spring Boot application.
+5) Alternatively, you can use the command line to run the application.
+   In the terminal, use this command : ./mvnw spring-boot:run
+6) Once the application is up and running, you can use a tool like Postman or cURL to send requests to http://localhost:8080/ping and confirm that the application is running as expected.
 
 ## Design considerations
-*Replace this: I decided to build X for Y reasons.*
+1) I decided to use MongoDB as a persistent store to save User and Transaction data. You can find the schema under /persistence package.
+2) As mentioned here - [event-sourcing](https://martinfowler.com/eaaDev/EventSourcing.html), we need to store transaction data somewhere so that even if we lose User data, we can get it back by playing the transaction data in chronological order.
+3) For this purpose, a fast persistent store like MongoDB has been chosen. It is also very simple to configure. 
+4) More on why MongoDB is a perfect choice for Real Time Payments services can be found here - [MongoDB-Real-Time-Payment](https://www.mongodb.com/resources/basics/real-time-payments)
 
 ## Bonus: Deployment considerations
-*Replace this: If I were to deploy this, I would host it in this way with these technologies.*
+ If I were to deploy this, I would :
+1) Containerize the application using Docker :
+   Create a Dockerfile to package the Spring Boot application.
+   Build and test the Docker image locally.
+2) Choose a Cloud Platform :
+   Evaluate cloud providers (AWS, GCP, Azure) based on cost, scalability, and managed services.
+3) Implement Container Orchestration:
+   Integrate the Docker image with Kubernetes or Amazon ECS.
+   Configure Deployments, Services, and Ingress resources.
+4) Establish a CI/CD Pipeline:
+   Set up a CI pipeline to build, test, and push the Docker image.
+   Integrate the CI pipeline with a CD tool for automated deployments.
+5) Configure Monitoring and Logging:
+   Integrate with monitoring solutions (Prometheus, Grafana) for metrics.
+6) Optimize for Scalability and High Availability:
+   Configure autoscaling based on resource utilization or traffic.
+   Implement load balancing and redundancy for fault tolerance.
+6) Establish a Disaster Recovery Plan:
+   Implement regular backups of application data and configuration.
 
 ## ASCII art
 *Optional but suggested, replace this:*

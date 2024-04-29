@@ -1,7 +1,6 @@
 package current.controllertest;
 import current.controller.ApplicationController;
 import current.exception.DuplicateMessageIdException;
-import current.exception.NotMatchingMessageIdException;
 import current.exception.UserNotFoundException;
 import current.model.*;
 import current.service.ApplicationService;
@@ -14,10 +13,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import current.model.Error;
 
-import java.util.Map;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+
+/*
+Unit test cases for ApplicationController Class
+ */
 
 @ExtendWith(MockitoExtension.class)
 class ApplicationControllerTest {

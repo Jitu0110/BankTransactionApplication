@@ -6,6 +6,10 @@ import current.exception.UserNotFoundException;
 import current.model.*;
 import current.model.Error;
 import current.service.ApplicationService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,11 @@ public class ApplicationController {
 
 
     @PutMapping("/authorization/{messageId}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Authorization successful", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AuthorizationResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class)))
+    })
     public ResponseEntity<?> processAuthorization(
             @PathVariable("messageId") String messageId,
             @Valid @RequestBody AuthorizationRequest authorizationRequest) {
@@ -57,6 +66,11 @@ public class ApplicationController {
 
 
     @PutMapping("/load/{messageId}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Load successful", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoadResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class)))
+    })
     public ResponseEntity<?> processLoad(
             @PathVariable("messageId") String messageId,
             @Valid  @RequestBody LoadRequest loadRequest) {

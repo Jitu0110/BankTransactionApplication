@@ -40,7 +40,7 @@ We are looking for attention in the following areas:
    Right-click on the class and select Run to start the Spring Boot application.
 5) Alternatively, you can use the command line to run the application.
    In the terminal, use this command : ./mvnw spring-boot:run
-6) Once the application is up and running, you can use a tool like Postman or cURL to send requests to http://localhost:8080/ping and confirm that the application is running as expected. As configured in the application.properties file , the Spring Boot application runs on port 8080.
+6) Once the application is up and running, you can use a tool like Postman or cURL to send requests to http://localhost:8080/ping and confirm that the application is running as expected. The Swagger API documentation will be available at this Url : http://localhost:8080/swagger-ui/index.html.
 7) A demo MongoDB database is hosted using Atlas; the connection string is provided in application.properties. To use your own instance, replace the connection string in the file.
 
 ## Design considerations
@@ -48,8 +48,11 @@ We are looking for attention in the following areas:
 2) As mentioned here - [event-sourcing](https://martinfowler.com/eaaDev/EventSourcing.html), we need to store transaction data somewhere so that even if we lose User data, we can get it back by playing the transaction data in chronological order.
 3) For this purpose, a fast persistent store like MongoDB has been chosen. It is also very simple to configure. 
 4) More on why MongoDB is a perfect choice for Real Time Payments services can be found here - [MongoDB-Real-Time-Payment](https://www.mongodb.com/resources/basics/real-time-payments)
-5) I opted for Spring Boot as the Java framework because it seamlessly integrates with Maven. This combination offers a comprehensive backend application environment perfect for hosting REST APIs.
+5) Spring Boot was chosen as the Java framework for this project due to its seamless integration with Maven. This combination provides a comprehensive backend environment ideal for building and deploying REST APIs.
 6) Spring Boot's auto-configuration capabilities further streamline development. It simplifies the integration with MongoDB, allowing you to focus on crafting the business logic for load and authorization.
+7) Additionally, Swagger API documentation has been integrated with Spring Boot to facilitate API testing. Once the application is up and running, the Swagger documentation can be accessed at http://localhost:8080/swagger-ui/index.html.
+
+Current Assumption: The current design assumes all transactions are processed in a single, unspecified currency. The currency field within the Amount object is currently being ignored.
 
 ## Bonus: Deployment considerations
  If I were to deploy this, I would :

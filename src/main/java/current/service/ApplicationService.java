@@ -30,6 +30,10 @@ public class ApplicationService {
         String currency = authorizationRequest.getTransactionAmount().getCurrency();
         DebitCredit debitCredit = authorizationRequest.getTransactionAmount().getDebitOrCredit();
 
+        if (!debitCredit.getValue().equals("DEBIT")) {
+            throw new IllegalArgumentException("Authorization request requires debitOrCredit to be 'DEBIT'");
+        }
+
         //Check if Transaction with message ID already exists
         isTransactionWithMessageIdPresent(messageId);
 
@@ -91,6 +95,10 @@ public class ApplicationService {
         double transactionAmount = Double.parseDouble(loadRequest.getTransactionAmount().getAmount());
         String currency = loadRequest.getTransactionAmount().getCurrency();
         DebitCredit debitCredit = loadRequest.getTransactionAmount().getDebitOrCredit();
+
+        if (!debitCredit.getValue().equals("CREDIT")) {
+            throw new IllegalArgumentException("Load request requires debitOrCredit to be 'CREDIT'");
+        }
 
         //Check if Transaction with message ID already exists
         isTransactionWithMessageIdPresent(messageId);

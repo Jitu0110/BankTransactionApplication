@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +51,7 @@ public class ApplicationController {
             AuthorizationResponse authorizationResponse = service.processAuthorization(authorizationRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(authorizationResponse);
         }
-        catch (NotMatchingMessageIdException | DuplicateMessageIdException | UserNotFoundException e){
+        catch (NotMatchingMessageIdException | DuplicateMessageIdException | UserNotFoundException | IllegalArgumentException e){
             Error error = new Error();
             error.setMessage(e.getMessage());
             error.setCode("400");
@@ -88,7 +89,7 @@ public class ApplicationController {
 
             return ResponseEntity.status(HttpStatus.CREATED).body(loadResponse);
         }
-        catch (NotMatchingMessageIdException | DuplicateMessageIdException e){
+        catch ( NotMatchingMessageIdException | DuplicateMessageIdException | IllegalArgumentException e){
             Error error = new Error();
             error.setMessage(e.getMessage());
             error.setCode("400");

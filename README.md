@@ -44,13 +44,18 @@ We are looking for attention in the following areas:
 7) A demo MongoDB database is hosted using Atlas; the connection string is provided in application.properties. To use your own instance, replace the connection string in the file.
 
 ## Design considerations
-1) I decided to use MongoDB as a persistent store to save User and Transaction data. You can find the schema under /persistence package.
-2) As mentioned here - [event-sourcing](https://martinfowler.com/eaaDev/EventSourcing.html), we need to store transaction data somewhere so that even if we lose User data, we can get it back by playing the transaction data in chronological order.
-3) For this purpose, a fast persistent store like MongoDB has been chosen. It is also very simple to configure. 
-4) More on why MongoDB is a perfect choice for Real Time Payments services can be found here - [MongoDB-Real-Time-Payment](https://www.mongodb.com/resources/basics/real-time-payments)
-5) Spring Boot was chosen as the Java framework for this project due to its seamless integration with Maven. This combination provides a comprehensive backend environment ideal for building and deploying REST APIs.
-6) Spring Boot's auto-configuration capabilities further streamline development. It simplifies the integration with MongoDB, allowing you to focus on crafting the business logic for load and authorization.
-7) Additionally, Swagger API documentation has been integrated with Spring Boot to facilitate API testing. Once the application is up and running, the Swagger documentation can be accessed at http://localhost:8080/swagger-ui/index.html.
+Persistence:
+* MongoDB was selected as the persistent store for User and Transaction data. Its schema can be found in the /persistence package.
+* MongoDB's ability to store historical data aligns with the event sourcing approach, allowing reconstruction of User data from past transactions if needed.
+* For this purpose, a fast persistent store like MongoDB with its ease of configuration is well-suited for this application.
+* More on why MongoDB is a perfect choice for Real Time Payments services can be found here - [MongoDB-Real-Time-Payment](https://www.mongodb.com/resources/basics/real-time-payments)
+
+Backend Framework:
+* Spring Boot was chosen as the Java framework for this project due to its seamless integration with Maven. This combination provides a comprehensive backend environment ideal for building and deploying REST APIs.
+* Spring Boot's auto-configuration capabilities further streamline development. It simplifies the integration with MongoDB, allowing you to focus on crafting the business logic for load and authorization.
+
+API Documentation:
+* Spring Boot integrates seamlessly with Swagger, providing comprehensive API documentation. This simplifies API testing and exploration. Access the Swagger documentation at http://localhost:8080/swagger-ui/index.html once the application is running.
 
 Current Assumption: The current design assumes all transactions are processed in a single, unspecified currency. The currency field within the Amount object is currently being ignored.
 

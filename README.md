@@ -57,7 +57,7 @@ Backend Framework:
 API Documentation:
 * Spring Boot integrates seamlessly with Swagger, providing comprehensive API documentation. This simplifies API testing and exploration. Access the Swagger documentation at http://localhost:8080/swagger-ui/index.html once the application is running.
 
-Current Assumption: The current design assumes all transactions are processed in a single, unspecified currency. The currency field within the Amount object is currently being ignored.
+Current Assumption: The current design assumes all transactions are processed in a single currency - "USD".
 
 ## Bonus: Deployment considerations
  If I were to deploy this, I would :

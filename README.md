@@ -40,7 +40,8 @@ We are looking for attention in the following areas:
    Right-click on the class and select Run to start the Spring Boot application.
 5) Alternatively, you can use the command line to run the application.
    In the terminal, use this command : ./mvnw spring-boot:run
-6) Once the application is up and running, you can use a tool like Postman or cURL to send requests to http://localhost:8080/ping and confirm that the application is running as expected. As provided in the application.properties file , the Spring Boot application runs on port 8080.
+6) Once the application is up and running, you can use a tool like Postman or cURL to send requests to http://localhost:8080/ping and confirm that the application is running as expected. As configured in the application.properties file , the Spring Boot application runs on port 8080.
+7) A demo MongoDB database is hosted using Atlas; the connection string is provided in application.properties. To use your own instance, replace the connection string in the file.
 
 ## Design considerations
 1) I decided to use MongoDB as a persistent store to save User and Transaction data. You can find the schema under /persistence package.

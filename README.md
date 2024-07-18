@@ -4,7 +4,7 @@ Real-Time Bank Transaction Application
 ## Overview
 This project is a Java Spring Boot application that provides a RESTful API for real-time balance calculation through event-sourcing. It accepts two types of transactions: loads (credit) and authorizations (debit). The application uses MongoDB as the persistent store for user and transaction data.
 
-The project uses concepts of Event Sourcing. More on this here : https://martinfowler.com/eaaDev/EventSourcing.html
+<b> The project uses concepts of Event Sourcing. More on this here : https://martinfowler.com/eaaDev/EventSourcing.html </b>
 
 ## Schema
 The application follows the OpenAPI 3.0 schema defined in the included service.yml file.
